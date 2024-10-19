@@ -18,9 +18,9 @@ public class cartaodeCredito {
     if(valor <= this.limite){
         this.limite -= valor;
         this.fatura += valor;
-        System.out.println("Parabéns pela sua compra!!! Vc não é PROBRE!!!");
+        System.out.println("Parabéns pela sua compra!!!");
     }else{
-        System.out.println("Voce não tem limite para concluir sua compra, SEU LAZARENTO PROBRE!!!!");
+        System.out.println("Voce não tem limite para concluir sua compra!!!");
         System.out.println("Seu limite é de : "+ this.limite);
     }
     }
