@@ -6,6 +6,8 @@ private String numeroDoTitular;
 private String cpf;
 private double limite;
 private double fatura;
+private double cashbackAcumulado;
+private final double TAXA_CASHBACK = 0.05;
 
 public String getNumeroDoTitular() {
     return numeroDoTitular;
@@ -51,16 +53,21 @@ public double consultarLimite(){
 public double consultarSaldo(){
     return fatura;
 }
+public double getCashbackAcumulado() {
+    return cashbackAcumulado;
+}
 
 public void realizarCompra(double valor) {
     if (valor <= this.limite) {
         this.limite -= valor;
         this.fatura += valor;
-        System.out.println("Parabéns pela sua compra!!!");
+        double cashback = valor * TAXA_CASHBACK;
+        this.cashbackAcumulado += cashback;
+        System.out.println("Parabéns pela sua compra! Você recebeu R$" + cashback + " de cashback.");
     } else {
         System.out.println("Você não tem limite para concluir sua compra!");
         System.out.println("Seu limite é de: " + this.limite);
     }
+}
 
         }
-    }
