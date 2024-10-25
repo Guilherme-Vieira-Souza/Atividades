@@ -1,0 +1,70 @@
+package CARTAO;
+import java.util.Scanner;
+
+public class principal {
+
+    public static void main(String[] args) {
+       
+        cartaodeCredito c = new cartaodeCredito();
+
+     
+        c.setCpf("123.123.123-45");
+        c.setLimite(100);
+
+        
+        Scanner sc = new Scanner(System.in);
+
+        
+        System.out.println("Limite inicial: R$" + c.getLimite());
+        c.realizarCompra(0); 
+        System.out.println("Fatura inicial: R$" + c.getFatura());
+
+       
+        int opcao = 1;
+
+
+        do {
+            System.out.println("\n=-=-=-=-= MENU =-=-=-=-=");
+            System.out.println("1 - Consultar Limite");
+            System.out.println("2 - Consultar Fatura");
+            System.out.println("3 - Realizar compra");
+            System.out.println("4 - Consultar Cashback");
+            System.out.println("5 - Aplicar Cashback na Fatura");
+            System.out.println("0 - Sair");
+            System.out.println("Escolha uma opção: ");
+
+            opcao = sc.nextInt();
+
+        
+            
+            switch (opcao) {
+                case 1:
+                    c.consultarLimite(); 
+                    break;
+                case 2:
+                    System.out.println("Sua fatura atual é: R$" + c.getFatura()); 
+                    break;
+                case 3:
+                    System.out.println("Digite o valor da compra: ");
+                    double valor = sc.nextDouble();
+                    c.realizarCompra(valor); 
+                    break;
+                case 4:
+                    c.getCashbackAcumulado(); 
+                    break;
+                case 5:
+                    c.aplicarCashbackNaFatura();
+                    break;
+                case 0:
+                    System.out.println("Encerrando o programa...");
+                    break;
+                default:
+                    System.err.println("Selecione uma opção correta!");
+                    break;
+            }
+        } while (opcao != 0);
+
+        
+        sc.close();
+    }
+}
