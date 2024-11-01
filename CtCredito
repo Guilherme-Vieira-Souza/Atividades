@@ -1,73 +1,52 @@
-package CARTAO;
-public class cartaodeCredito {
+public class CtCredito {
     
-private int numero;
-private String numeroDoTitular;
-private String cpf;
-private double limite;
-private double fatura;
-private double cashbackAcumulado;
-private final double TAXA_CASHBACK = 0.05;
+    private double limite;
+    private double fatura;
+    private double cashbackAcumulado;
 
-public String getNumeroDoTitular() {
-    return numeroDoTitular;
-}
-public void setNumeroDoTitular(String numeroDoTitular) {
-    this.numeroDoTitular = numeroDoTitular;
-}
 
-public double getFatura() {
-    return fatura;
+    public CtCredito(double limite) {
+        this.limite = limite; 
+    
 }
+    public CtCredito() {
+        this.limite = consultarLimite(); 
+        this.fatura = consultarLimite(); 
+        this.cashbackAcumulado = 0.0; 
+    } 
+    public double consultarLimite() {
+        return limite - fatura; 
+    }
 
-public void setFatura(double fatura) {
-    this.fatura = fatura;
-}
+    public double getFatura() {
+        return fatura;
+    }
 
-public double getLimite() {
-    return limite;
-}
+    public double getCashbackAcumulado() {
+        return cashbackAcumulado;
+    }
 
-public void setLimite(double limite) {
-    this.limite = limite;
-}
+    public void realizarCompra(double valor) {
+        if (valor <= (limite - fatura)) {
+            fatura += valor;
+            double cashback = valor * 0.05; 
+            cashbackAcumulado += cashback;
+            System.out.println("Compra de R$" + valor + " realizada com sucesso! Cashback acumulado: R$" + cashback);
+        } else {
+            System.err.println("Compra não autorizada! Limite insuficiente.");
+        }
+    }
 
-public String getCpf() {
-    return cpf;
-}
-
-public void setCpf(String cpf) {
-    this.cpf = cpf;
-}
-
-public int getNumero() {
-    return numero;
-}
-
-public void setNumero(int numero) {
-    this.numero = numero;
-}
-public double consultarLimite(){
-    return limite;
-}
-public double consultarSaldo(){
-    return fatura;
-}
-public double getCashbackAcumulado() {
-    return cashbackAcumulado;
-}
-
-public void realizarCompra(double valor) {
-    if (valor <= this.limite) {
-        this.limite -= valor;
-        this.fatura += valor;
-        double cashback = valor * TAXA_CASHBACK;
-        this.cashbackAcumulado += cashback;
-        System.out.println("Parabéns pela sua compra! Você recebeu R$" + cashback + " de cashback.");
-    } else {
-        System.out.println("Você não tem limite para concluir sua compra!");
-        System.out.println("Seu limite é de: " + this.limite);
+    public void aplicarCashbackNaFatura() {
+        if (cashbackAcumulado > 0) {
+            fatura -= cashbackAcumulado;
+            if (fatura < 0) {
+                fatura = 0;
+            }
+            System.out.println("Cashback de R$" + cashbackAcumulado + " aplicado na fatura.");
+            cashbackAcumulado = 0; 
+        } else {
+            System.out.println("Não há cashback disponível para aplicar.");
+        }
     }
 }
-
-        }
