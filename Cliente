@@ -1,0 +1,54 @@
+public class Cliente {
+
+    private String Nome;
+    private String Cpf;
+    private String email;
+    private String Telefone; 
+
+    public Cliente (String Nome, String Cpf, String telefone){
+        this.Nome = "";
+        this.Cpf = "";
+        this.Telefone = "";
+        }
+    public Cliente (String Nome, String Cpf, String email, String Telefone){
+        this.Nome = Nome;
+        this.Cpf = Cpf;
+        this.email = email;
+        this.Telefone = Telefone;
+
+
+
+    
+    }
+    public String getCpf() {
+        return Cpf;
+    }
+    public void setCpf(String cpf) {
+        Cpf = cpf;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setNome(String nome) {
+        Nome = nome;
+    }
+    public String getNome() {
+        return Nome;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getTelefone() {
+        return Telefone;
+    }
+    public void setTelefone(String telefone) {
+        Telefone = telefone;
+    }
+
+
+
+
+
+
+
+}
