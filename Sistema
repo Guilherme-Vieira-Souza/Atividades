@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 public class Principal {
@@ -7,84 +6,77 @@ public class Principal {
         Scanner sc = new Scanner(System.in);
         
        
-            CtCredito c = new CtCredito(1000);
-            
-
-                System.out.println("==-=--==-=-=Preencha os dados do cliente abaixo==-=-==-=-");
-                System.out.println("Digite o Nome: ");
-                String Nome = sc.nextLine();
-                System.out.println("Digite o Cpf: ");
-                String Cpf = sc.nextLine();
-                System.out.println("Digite o Email: ");
-                String email = sc.nextLine();
-                System.out.println("Digite o Telefone: ");
-                String telefone = sc.nextLine();
-               
-         Cliente cl = new Cliente(Nome, Cpf, email, telefone);
-
-        c.consultarLimite();
-            System.out.println("Limite inicial: R$" + c.consultarLimite());
-            System.out.println("Fatura inicial: R$" + c.getFatura());
-
-       
+        CartaoDeCredito c = new CartaoDeCredito(1000);
+        
+        
+        System.out.println("==-=--==-=-=Preencha os dados do cliente abaixo==-=-==-=-");
+        System.out.print("Digite o Nome: ");
+        String Nome = sc.nextLine();
+        System.out.print("Digite o Cpf: ");
+        String Cpf = sc.nextLine();
+        System.out.print("Digite o Email: ");
+        String email = sc.nextLine();
+        System.out.print("Digite o Telefone: ");
+        String telefone = sc.nextLine();
+        
+        Cliente cl = new Cliente(Nome, Cpf, email, telefone);
+        
         int opcao = 1;
 
-
         do {
-                System.out.println("\n=-=-=-=-= MENU =-=-=-=-=");
-                System.out.println("1 - Consultar Limite");
-                System.out.println("2 - Consultar Fatura");
-                System.out.println("3 - Realizar compra");
-                System.out.println("4 - Consultar Cashback");
-                System.out.println("5 - Aplicar Cashback na Fatura");
-                System.out.println("6 - Consultar dados completos do  cliente");
-                System.out.println("7 - Consultar dados simples do  cliente");
-                System.out.println("0 - Sair");
-                System.out.println("Escolha uma opção: ");
-
-            opcao = sc.nextInt();
-
-        
+            System.out.println("\n=-=-=-=-= MENU =-=-=-=-=");
+            System.out.println("1 - Consultar Limite");
+            System.out.println("2 - Consultar Fatura");
+            System.out.println("3 - Realizar compra");
+            System.out.println("4 - Consultar Cashback");
+            System.out.println("5 - Aplicar Cashback na Fatura");
+            System.out.println("6 - Exibir Histórico de Transações");
+            System.out.println("7 - Consultar dados completos do cliente");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha uma opção: ");
             
+            opcao = sc.nextInt();
+            sc.nextLine(); 
+
             switch (opcao) {
                 case 1:
-                    System.out.println("Seu limite é de: " + c.consultarLimite()); 
+                    System.out.println("Seu limite é de: R$" + c.consultarLimite());
                     break;
                 case 2:
-                    System.out.println("Sua fatura atual é: R$" + c.getFatura()); 
+                    System.out.println("Sua fatura atual é: R$" + c.getFatura());
                     break;
                 case 3:
-                    System.out.println("Digite o valor da compra: " );
+                    System.out.print("Digite o valor da compra: ");
                     double valor = sc.nextDouble();
-                    c.realizarCompra(valor); 
+                    sc.nextLine(); 
+                    System.out.print("Digite a descrição da compra: ");
+                    String descricao = sc.nextLine();
+                    c.realizarCompra(valor, descricao);
                     break;
                 case 4:
-                    System.out.println("Voçe tem: " + c.getCashbackAcumulado()+ " De cashBack"); 
+                    System.out.println("Você tem: R$" + c.getCashbackAcumulado() + " de cashback");
                     break;
                 case 5:
-                    c.aplicarCashbackNaFatura(); 
+                    c.aplicarCashbackNaFatura();
                     break;
-                case 6: 
-                    System.out.printf("\nNome: " + cl.getNome());
-                    System.out.printf("\nCpf: " + cl.getCpf());
-                    System.out.printf("\nE-mail: " + cl.getEmail());
-                    System.out.printf("\nTelefone: " + cl.getTelefone());
+                case 6:
+                    c.exibirHistorico(); 
                     break;
-                case 7: 
-                    System.out.printf("\nNome: " + cl.getNome());
-                    System.out.printf("\nCpf: " + cl.getCpf());
-                    System.out.printf("\nE-mail: " + cl.getEmail());
+                case 7:
+                    System.out.println("\nNome: " + cl.getNome());
+                    System.out.println("Cpf: " + cl.getCpf());
+                    System.out.println("E-mail: " + cl.getEmail());
+                    System.out.println("Telefone: " + cl.getTelefone());
                     break;
                 case 0:
                     System.out.println("Encerrando o programa...");
                     break;
                 default:
-                    System.err.println("Selecione uma opção correta!");
+                    System.err.println("Selecione uma opção válida!");
                     break;
             }
         } while (opcao != 0);
 
-        
         sc.close();
     }
 }
